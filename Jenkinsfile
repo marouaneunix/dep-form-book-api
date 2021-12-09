@@ -1,4 +1,4 @@
-def dockerContainerName = "api-book"
+def dockerContainerName = "api-book-prepod"
 def dockerImageTag = "${dockerContainerName}:latest"
 pipeline {
     agent any
@@ -27,10 +27,19 @@ pipeline {
                 }
             }
         }
+        stage ('Secrete') {
+        environment {
+            MAR1_SECRETS = credentials('mar1-preprod-secret')
+        }
+        steps {
+            echo 'pass ${MAR1_SECRETS_USR}'
+            echo 'pass ${MAR1_SECRETS_PSW}'
+            }
+        }
         stage('run the application') {
             steps {
                 sh ("chmod u+x deploy.sh")
-                sh ("./deploy.sh ${dockerContainerName} ${dockerImageTag} 9010")
+                sh ("./deploy.sh ${dockerContainerName} ${dockerImageTag} 9012")
             }
         }
     }

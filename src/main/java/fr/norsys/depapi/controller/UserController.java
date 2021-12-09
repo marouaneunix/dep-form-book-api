@@ -10,6 +10,6 @@ public class UserController {
 
     @GetMapping("/users")
     public List<UserDTO> findUsers() {
-        return List.of(new UserDTO(10L, "marouane"));
+        return List.of(new UserDTO(10L, "Predod 1"));
     }
 }
