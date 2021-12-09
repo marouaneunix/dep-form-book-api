@@ -1,4 +1,4 @@
-def dockerContainerName = "api-book"
+def dockerContainerName = "api-book-staging"
 def dockerImageTag = "${dockerContainerName}:latest"
 pipeline {
     agent any
@@ -30,7 +30,7 @@ pipeline {
         stage('run the application') {
             steps {
                 sh ("chmod u+x deploy.sh")
-                sh ("./deploy.sh ${dockerContainerName} ${dockerImageTag} 9010")
+                sh ("./deploy.sh ${dockerContainerName} ${dockerImageTag} 9011")
             }
         }
     }
